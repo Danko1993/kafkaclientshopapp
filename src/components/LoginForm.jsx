@@ -27,7 +27,7 @@ const LoginForm = () => {
 
     const handleSubmit = async (values) => {
         try {
-            const response = await fetch('http://localhost:8081/login', {
+            const response = await fetch('http://localhost:8081/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const LoginForm = () => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            const { token } = await response.json();
+            const { message:token } = await response.json();
             login(token);
             navigate("/")
         } catch (error) {
