@@ -2,6 +2,7 @@ import React from 'react';
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import {useAuth} from "../AuthContext.jsx"
+import "../styles/Navbar.css";
 
 const categories = [
     {id:"powerTools", name: "Power Tools"},
@@ -10,8 +11,8 @@ const categories = [
 
 function Navbar() {
     const [showDropdown, setShowDropdown] = useState(false);
-    const {user} = useAuth();
-    const {logout} = useAuth();
+    const {user,logout} = useAuth();
+
 
 
     const toggleDropdown = () => {
@@ -20,8 +21,12 @@ function Navbar() {
 
     return (
         <nav className={"navbar"}>
-            <Link className={"NavbarLink"} to="/">Home</Link>
-            <Link className={"NavbarLink"} to="/all-products">Products</Link>
+
+            {user ? (
+                <Link className={"NavbarLink"} to="/user">Account</Link>
+            ):(
+                <Link className={"NavbarLink"} to="/">Home</Link>
+            )}
             <div className={"dropdown"}>
                 <button className={"dropdownButton"} onClick={toggleDropdown}>Categories</button>
 

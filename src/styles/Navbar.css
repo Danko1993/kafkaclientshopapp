@@ -1,0 +1,85 @@
+@import "./util.css";
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    width: 100vw;
+}
+button.NavbarLink,
+.NavbarLink {
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    font-size: 1rem;
+    font-family: var(--main-font);
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdownButton {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-family: var(--main-font);
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    top: 100%;
+    left: 0;
+}
+
+.dropdownContent a {
+    display: block;
+    padding: 8px 10px;
+    color: white;
+    text-decoration: none;
+    font-family: var(--main-font);
+}
+
+.dropdownContent a:hover {
+    background-color: #555;
+}
+
+
+.dropdown:hover .dropdownContent {
+    display: block;
+}
+
+
+
+@media (min-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        justify-content: left;
+    }
+
+    .NavbarLink {
+        padding: 10px 20px;
+    }
+
+    .dropdown {
+        margin-top: 0;
+    }
+
+    .dropdownContent {
+        position: absolute;
+        min-width: 150px;
+    }
+}
+@media (min-width: 1024px) {
+
+}

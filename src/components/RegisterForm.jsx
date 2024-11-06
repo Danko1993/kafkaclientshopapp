@@ -1,7 +1,8 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "../styles/RegisterForm.css"
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -54,36 +55,36 @@ const RegisterForm = () => {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
         >
-            <Form>
-                <div>
+            <Form className="register-form">
+                <div className="form-group">
                     <label htmlFor="name">Name</label>
                     <Field name="name" type="text" />
-                    <ErrorMessage name="name" component="div" />
+                    <ErrorMessage name="name" component="div" className="error-message" />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="surname">Surname</label>
                     <Field name="surname" type="text" />
-                    <ErrorMessage name="surname" component="div" />
+                    <ErrorMessage name="surname" component="div" className="error-message" />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="phoneNumber">Phone Number</label>
                     <Field name="phoneNumber" type="text" />
-                    <ErrorMessage name="phoneNumber" component="div" />
+                    <ErrorMessage name="phoneNumber" component="div" className="error-message" />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <Field name="email" type="email" />
-                    <ErrorMessage name="email" component="div" />
+                    <ErrorMessage name="email" component="div" className="error-message" />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="address">Address</label>
                     <Field name="address" type="text" />
-                    <ErrorMessage name="address" component="div" />
+                    <ErrorMessage name="address" component="div" className="error-message" />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <Field name="password" type="password" />
-                    <ErrorMessage name="password" component="div" />
+                    <ErrorMessage name="password" component="div" className="error-message" />
                 </div>
                 <button type="submit">Register</button>
             </Form>

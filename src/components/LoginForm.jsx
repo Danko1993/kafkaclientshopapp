@@ -5,7 +5,7 @@ import {Link, redirect} from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../AuthContext";
 import RegisterForm from "./RegisterForm.jsx";
-// import './LoginForm.css';
+import '../styles/LoginForm.css';
 
 const LoginForm = () => {
     const { login } = useAuth();
@@ -39,7 +39,7 @@ const LoginForm = () => {
             }
             const { message:token } = await response.json();
             login(token);
-            navigate("/")
+            navigate("/user")
         } catch (error) {
             console.error('Error:', error);
         }
