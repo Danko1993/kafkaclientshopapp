@@ -1,0 +1,78 @@
+.userPanel {
+    background-color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    color: white;
+}
+
+.userPanel h1 {
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.userPanel p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.userPanelButton {
+    background-color: #444;
+    color: #e0e0e0;
+    border: 1px solid #555;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px auto;
+    display: block;
+    width: 150px;
+    max-width: 100%;
+    text-align: center;
+}
+
+.userPanelButton:hover {
+    background-color: #555;
+}
+
+.userFieldUpdaterForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userFieldUpdaterButtons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #444;
+    color: white;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+input:focus {
+    border-color: #b3e5fc;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .userPanel {
+        width: 90%;
+    }
+}

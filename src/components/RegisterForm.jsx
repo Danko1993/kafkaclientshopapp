@@ -3,9 +3,11 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
 import "../styles/RegisterForm.css"
+import {useAuth} from "../AuthContext.jsx";
 
 const RegisterForm = () => {
     const navigate = useNavigate();
+    const {user} = useAuth();
 
     const initialValues = {
         name: '',
@@ -28,8 +30,13 @@ const RegisterForm = () => {
     });
 
     const handleSubmit = async (values) => {
+
+        const url = (user&&user.roles.includes("ADMIN"))? ('http://localhost:8081/register/employee'):('http://localhost:8081/register')
+        const redirect = (user && user.roles.includes("ADMIN"))?("/products"):("/login");
+
+
         try {
-            const response = await fetch('http://localhost:8081/register', {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,7 +50,7 @@ const RegisterForm = () => {
 
             const data = await response.json();
             console.log('Success:', data);
-            navigate("/login")
+            navigate(redirect)
         } catch (error) {
             console.error('Error:', error);
         }

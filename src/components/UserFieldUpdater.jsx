@@ -22,11 +22,11 @@ const UserFieldUpdater = ({fieldName, fieldLabel,fieldValue}) => {
         setUpdate(!update);
 
     }
-    const phoneValidationSchema=Yup.object({
+    const dataValidationSchema=Yup.object({
         [fieldName]: Yup.string().required(`${fieldLabel} must be provided`),
     });
 
-    const handlePhoneUpdate = async (values) => {
+    const handleUpdate = async (values) => {
         try {
             console.log("Token: ", localStorage.getItem('token'));
             const response = await fetch(`http://localhost:8081/client/update?email=${user.sub}`, {
@@ -36,7 +36,10 @@ const UserFieldUpdater = ({fieldName, fieldLabel,fieldValue}) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(values),
+
             });
+            console.log(response);
+            handleSetUpdate()
         } catch (error) {
             console.log(error);
         }
@@ -47,18 +50,20 @@ const UserFieldUpdater = ({fieldName, fieldLabel,fieldValue}) => {
             {update ? (
                     <Formik
                         initialValues={{ [fieldName]: fieldValue || '' }}
-                        validationSchema={phoneValidationSchema}
-                        onSubmit={handlePhoneUpdate}
+                        validationSchema={dataValidationSchema}
+                        onSubmit={handleUpdate}
                     >
                         {() => (
-                            <Form>
+                            <Form className="userFieldUpdaterForm">
                                 <div>
                                     <label htmlFor={fieldName}>{fieldLabel}:</label>
                                     <Field name={fieldName} type="text" />
                                     <ErrorMessage name={fieldName} component="div" className="error" />
                                 </div>
-                                <button type="submit">Save</button>
-                                <button type="button" onClick={handleSetUpdate}>Cancel</button>
+                                <div className="userFieldUpdaterButtons">
+                                    <button className="userPanelButton" type="submit">Save</button>
+                                    <button className="userPanelButton" type="button" onClick={handleSetUpdate}>Cancel</button>
+                                </div>
                             </Form>
                         )}
                     </Formik>
@@ -66,7 +71,7 @@ const UserFieldUpdater = ({fieldName, fieldLabel,fieldValue}) => {
                 :
                 (<div>
                     <p>{fieldLabel}: {fieldValue}</p>
-                    <button onClick={handleSetUpdate}>Update</button>
+                    <button className={"userPanelButton"} onClick={handleSetUpdate}>Update</button>
                 </div>)
 
             }

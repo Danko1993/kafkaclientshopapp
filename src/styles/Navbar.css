@@ -4,10 +4,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     padding: 10px;
     background-color: #333;
     color: white;
-    width: 100vw;
+    width: 100%;
+    flex-wrap: wrap;
 }
 button.NavbarLink,
 .NavbarLink {
@@ -16,7 +18,7 @@ button.NavbarLink,
     text-decoration: none;
     padding: 8px 15px;
     font-size: 1rem;
-    font-family: var(--main-font);
+    width: 25%;
 }
 
 .dropdown {
@@ -29,7 +31,6 @@ button.NavbarLink,
     border: none;
     padding: 8px 15px;
     cursor: pointer;
-    font-family: var(--main-font);
 }
 
 .dropdownContent {
@@ -47,7 +48,6 @@ button.NavbarLink,
     padding: 8px 10px;
     color: white;
     text-decoration: none;
-    font-family: var(--main-font);
 }
 
 .dropdownContent a:hover {
