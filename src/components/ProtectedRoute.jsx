@@ -1,23 +1,22 @@
-import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 
 const ProtectedRoute = ({ children, roles }) => {
-    const { user } = useAuth();
+    const { user, isLoading } = useAuth();
+
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
 
     if (!user) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/login" replace />;
     }
 
-    if (Array.isArray(user.roles)) {
-        const hasAccess = user.roles.some(role => roles.includes(role));
-        if (!hasAccess) {
-            return <Navigate to="/forbidden" />;
-        }
-    } else {
-        console.error("Roles are not in the expected format.");
-        return <Navigate to="/forbidden" />;
+
+    if (roles && !roles.some(role => user.roles.includes(role))) {
+        return <Navigate to="/forbidden" replace />;
     }
 
     return children;
