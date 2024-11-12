@@ -11,7 +11,8 @@ import {useAuth} from "./AuthContext.jsx";
 import EmployeeNavbar from "./components/EmployeeNavbar.jsx";
 import Products from "./components/Products.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import Forbiden from "./components/Forbiden.jsx";
+import Forbidden from "./components/Forbiden.jsx";
+import AddProductForm from "./components/AddProductForm.jsx";
 
 function App() {
     const {user}= useAuth();
@@ -29,13 +30,21 @@ function App() {
                 <Route path="/categories/:categoryName" element={<Category />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/register" element={<RegisterForm />} />
-                <Route path="/forbidden" element={<Forbiden/>} />
+                <Route path="/forbidden" element={<Forbidden/>} />
                 <Route
                     path="/products"
                     element={
                         <ProtectedRoute roles={['EMPLOYEE', 'ADMIN']}>
                             <Products />
                         </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/add-product"
+                    element={
+                    <ProtectedRoute roles={['EMPLOYEE', 'ADMIN']}>
+                        <AddProductForm />
+                    </ProtectedRoute>
                     }
                 />
 

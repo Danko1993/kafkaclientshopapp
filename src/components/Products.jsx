@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import "../styles/Products.css";
+import { Link } from 'react-router-dom';
+import ProductCard from './ProductCard';
+import '../styles/Products.css';
 
 function Products() {
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const [suggestions, setSuggestions] = useState([]);
 
-    // Pobieranie produktów z API
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -23,74 +23,38 @@ function Products() {
         fetchProducts();
     }, []);
 
-    const handleSearch = (event) => {
-        const term = event.target.value;
-        setSearchTerm(term);
+    const handleUpdate = async (productId, updatedProduct) => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`http://localhost:8083/product/update-product-data?productId=${productId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(updatedProduct),
+            });
+            if (!response.ok) throw new Error('Failed to update product');
+            const updatedData = await response.json();
+            console.log('Product updated:', updatedData);
 
-        if (term.length > 0) {
-            const filtered = products.filter(product =>
-                product.producerCode.toLowerCase().includes(term.toLowerCase())
-            );
-            setFilteredProducts(filtered);
-            setSuggestions(filtered.slice(0, 5));
-        } else {
-            setFilteredProducts(products);
-            setSuggestions([]);
+            // Aktualizacja listy produktów
+            setProducts(products.map(p => (p.id === productId ? updatedProduct : p)));
+        } catch (error) {
+            console.error('Error updating product:', error);
         }
-    };
-
-    const handleSuggestionClick = (code) => {
-        setSearchTerm(code);
-        const filtered = products.filter(product =>
-            product.producerCode.toLowerCase().includes(code.toLowerCase())
-        );
-        setFilteredProducts(filtered);
-        setSuggestions([]);
     };
 
     return (
         <div className="products-container">
             <h1>Products List</h1>
-            <input
-                type="text"
-                placeholder="Search by Producer Code"
-                value={searchTerm}
-                onChange={handleSearch}
-                className="search-input"
-            />
-
-            {suggestions.length > 0 && (
-                <ul className="suggestions-list">
-                    {suggestions.map((product, index) => (
-                        <li
-                            key={index}
-                            className="suggestion-item"
-                            onClick={() => handleSuggestionClick(product.producerCode)}
-                        >
-                            {product.producerCode}
-                        </li>
-                    ))}
-                </ul>
-            )}
-
+            <div className="add-product-button">
+                <Link to="/add-product" className="add-product-link">Add New Product</Link>
+            </div>
             <div className="product-list">
-                {filteredProducts.map((product) => {
-                    const imageUrl = product.imagePath ? product.imagePath.split("\\").pop() : "placeholder.png";
-                    return (
-                        <div key={product.id} className="product-card">
-                            <img
-                                src={`http://localhost:8083/photos/${imageUrl}`}
-                                alt={product.name}
-                                className="product-image"
-                                loading="lazy"
-                            />
-                            <h3>{product.name}</h3>
-                            <p><strong>Producer Code:</strong> {product.producerCode}</p>
-                            <p><strong>Price:</strong> {product.price} {product.currency}</p>
-                            <p><strong>Stock:</strong> {product.stockQuantity} pcs</p>
-                        </div>
-                    );
-                })}
+                {filteredProducts.map(product => (
+                    <ProductCard key={product.id} product={product} onUpdate={handleUpdate} />
+                ))}
             </div>
         </div>
     );

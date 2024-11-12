@@ -1,4 +1,3 @@
-/* Kontener produktów */
 .products-container {
     width: 90%;
     margin: 0 auto;
@@ -9,16 +8,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
-/* Nagłówek */
-h1 {
-    font-size: 2rem;
+.products-container h1{
+    margin-bottom: 15px;
+}
+
+.add-product-button {
+    text-align: center;
+    width: fit-content;
     margin-bottom: 20px;
+    height: 30px;
+
 }
 
-/* Wyszukiwarka */
+.add-product-link {
+    background-color: #444;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 .search-input {
     width: 100%;
     padding: 10px;
@@ -30,70 +42,9 @@ h1 {
     outline: none;
 }
 
-/* Lista produktów */
 .product-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    width: 100%;
-}
-
-/* Karta produktu */
-.product-card {
-    background-color: #444;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-}
-
-/* Zdjęcie produktu */
-.product-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-/* Detale produktu */
-.product-card h3 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-}
-
-.product-card p {
-    margin: 5px 0;
-    color: #ddd;
-}
-
-/* Lista podpowiedzi */
-.suggestions-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0;
-    background-color: #444;
-    width: 50%;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.suggestion-item {
-    padding: 10px;
-    cursor: pointer;
-    color: #fff;
-}
-
-.suggestion-item:hover {
-    background-color: #555;
 }
